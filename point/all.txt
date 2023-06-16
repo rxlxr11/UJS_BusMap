@@ -1,0 +1,16 @@
+D:/study/za/dataStructure/point/1.txt
+D:/study/za/dataStructure/point/2.txt
+D:/study/za/dataStructure/point/3.txt
+D:/study/za/dataStructure/point/4.txt
+D:/study/za/dataStructure/point/5.txt
+D:/study/za/dataStructure/point/6.txt
+D:/study/za/dataStructure/point/7.txt
+D:/study/za/dataStructure/point/8.txt
+D:/study/za/dataStructure/point/9.txt
+D:/study/za/dataStructure/point/10.txt
+D:/study/za/dataStructure/point/11.txt
+D:/study/za/dataStructure/point/12.txt
+D:/study/za/dataStructure/point/13.txt
+D:/study/za/dataStructure/point/14.txt
+D:/study/za/dataStructure/point/15.txt
+D:/study/za/dataStructure/point/16.txt
