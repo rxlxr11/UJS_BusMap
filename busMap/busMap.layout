@@ -1,0 +1,72 @@
+[
+    {
+        "caretX": 21,
+        "caretY": 65,
+        "filename": "D:/study/za/dataStructure/busMap/function.c",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 4,
+        "topLine": 52
+    },
+    {
+        "caretX": 14,
+        "caretY": 46,
+        "filename": "D:/study/za/dataStructure/busMap/map.c",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 2,
+        "topLine": 162
+    },
+    {
+        "caretX": 10,
+        "caretY": 45,
+        "filename": "D:/study/za/dataStructure/busMap/map.h",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 1,
+        "topLine": 41
+    },
+    {
+        "caretX": 22,
+        "caretY": 2,
+        "filename": "D:/study/za/dataStructure/busMap/IO.c",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 6,
+        "topLine": 163
+    },
+    {
+        "caretX": 17,
+        "caretY": 3,
+        "filename": "D:/study/za/dataStructure/busMap/IO.h",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 5,
+        "topLine": 1
+    },
+    {
+        "caretX": 27,
+        "caretY": 826,
+        "filename": "D:/study/za/dataStructure/busMap/main.c",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 0,
+        "topLine": 358
+    },
+    {
+        "caretX": 10,
+        "caretY": 8,
+        "filename": "D:/study/za/dataStructure/busMap/function.h",
+        "focused": false,
+        "isOpen": true,
+        "leftChar": 1,
+        "order": 3,
+        "topLine": 1
+    }
+]

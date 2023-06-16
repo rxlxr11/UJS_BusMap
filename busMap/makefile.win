@@ -1,0 +1,40 @@
+# Project: busMap
+# Makefile created by Red Panda C++ 2.19
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = busMap_private.res
+OBJ      = function.o map.o main.o IO.o $(RES)
+LINKOBJ  = function.o map.o main.o IO.o busMap_private.res
+CLEANOBJ  =  function.o map.o main.o IO.o  busMap_private.res busMap.exe
+LIBS     =  -fstack-protector-strong
+INCS     =  
+CXXINCS  =  
+BIN      = busMap.exe
+CXXFLAGS = $(CXXINCS)  -g3 -pipe -Wall -D__DEBUG__
+CFLAGS   = $(INCS)  -g3 -pipe -Wall -D__DEBUG__
+RM       = del /q /f
+WINDRESFLAGS  = 
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	-$(RM) $(CLEANOBJ) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+function.o: function.c
+
+map.o: map.c
+
+main.o: main.c
+
+IO.o: IO.c
+
+busMap_private.res: busMap_private.rc 
+	$(WINDRES) -i busMap_private.rc --input-format=rc -o busMap_private.res -O coff $(WINDRESFLAGS) 
+
