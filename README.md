@@ -121,3 +121,47 @@
 --------------
 
 ## 感想 
+
+
+```C
+
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include <Wire.h>
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 32
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire);
+
+const uint8_t PROGMEM myImage[] = {
+  // 在这里插入你的单色位图数据
+};
+
+void setup() {
+  Serial.begin(115200);
+
+  Wire.begin(4, 5);  // SDA引脚连接到D2（GPIO4），SCL引脚连接到D1（GPIO5）
+
+  if(!display.begin(SSD1306_I2C_ADDRESS, 0x3C)) {
+    Serial.println(F("SSD1306分辨率未找到，请确认是否正确连接。"));
+    while (true);
+  }
+  display.display();  // 清空显示
+
+  delay(1000);
+}
+
+void loop() {
+  // 清空显示
+  display.clearDisplay();
+
+  // 显示图片
+  display.drawBitmap(0, 0, myImage, SCREEN_WIDTH, SCREEN_HEIGHT, SSD1306_WHITE);
+
+  // 更新显示
+  display.display();
+
+  delay(1000);  // 显示图片一秒钟
+}
+```  
