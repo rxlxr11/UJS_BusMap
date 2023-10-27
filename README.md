@@ -165,3 +165,200 @@ void loop() {
   delay(1000);  // 显示图片一秒钟
 }
 ```  
+
+```C
+//所有可达路线 
+ int allRoute(wayNode *allWay[10],int start,int end) { 
+         for (int i = 0; i < 10; i++) { 
+                 //TODO 
+                 allWay[i] = createWay(); 
+         } 
+         float time[10]; 
+         Neighbour *n; 
+         Point p1, p2, p; 
+         int  i = 0, routeCount = 0; 
+         int flag = 0; 
+         int start1_num = 0; 
+         int end1_num = 0; 
+         int start2_num[10]; 
+         int end2_num[10]; 
+         int start_1[10], end_1[10]; 
+         start_1[0] = start; 
+         end_1[0] = end; 
+         int start_2[10][10], end_2[10][10]; 
+         p1 = findPoint(start); 
+         p2 = findPoint(end); 
+         char startN[10]; 
+         char endN[10]; 
+         strcpy(startN,p1.name); 
+         strcpy(endN,p2.name); 
+         for (i = 0; i < 10; i++) { 
+                 allWay[i]->next = NULL; 
+                 strcpy(allWay[i]->name, p1.name); 
+                 allWay[i]->id = p1.id; 
+         } 
+         i = 0; 
+         p2 = findPoint(end); 
+         n = p1.first; 
+         //起点第一次 
+         while (n != NULL) { 
+                 //TODO 
+                 start_1[++i] = n->id; 
+                 n = n->next; 
+         } 
+         start1_num = i; 
+         for (; i >= 1; i--) { 
+  
+                 if (start_1[i] == end) { 
+                         //TODO 
+                         Neighbour *n = find_Neighbour(end, p1); 
+                         time[routeCount] = method_f(n); 
+                         insert_wayNode(allWay[routeCount], n->id, endN, n->route); 
+                         printWay(allWay[routeCount]); 
+                         start_1[i] = -1; 
+                         routeCount++; 
+                         break; 
+                 } 
+         } 
+         int same[10]; 
+         //从终点的搜索不可能有起点 
+         i = 0; 
+         //终点第一次 
+         n = p2.first; 
+         while (n != NULL) { 
+                 //TODO 
+                 if(n->id!=start){ 
+                         //TODO 
+                         end_1[++i] = n->id; 
+                 } 
+                 n = n->next; 
+         } 
+         //2条 
+         end1_num = i; 
+         int same_num = findSame(start_1, end_1, same, start1_num + 1, end1_num + 1); 
+         for (i = 0; i < same_num; i++) { 
+                 //TODO 
+                 Point pt = findPoint(same[i]); 
+                 Neighbour *nt = find_Neighbour(same[i], p1); 
+                 insert_wayNode(allWay[routeCount], same[i], pt.name, nt->route); 
+                 time[routeCount] = method_f(nt); 
+                 nt = find_Neighbour(end, pt); 
+                 insert_wayNode(allWay[routeCount], end, endN, nt->route); 
+                 time[routeCount] += method_f(nt); 
+                 printWay(allWay[routeCount]); 
+                 routeCount++; 
+                 for (int j = 0; j < start1_num; j++) { 
+                         //TODO 
+                         if (start_1[j] == same[i]) { 
+                                 //TODO 
+                                 start_1[j] = -1; 
+                                 break; 
+                         } 
+                 } 
+                 for (int j = 0; j < end1_num; j++) { 
+                         //TODO 
+                         if (end_1[j] == same[i]) { 
+                                 //TODO 
+                                 end_1[j] = -1; 
+                                 break; 
+                         } 
+                 } 
+         } 
+         //找起点的邻居节点的邻居节点 
+         for (i = 1; i <= start1_num; i++) { 
+                 //TODO 
+                 int j = 0; 
+                 if (start_1[i] != -1) { 
+                         //TODO 
+                         p = findPoint(start_1[i]); 
+                         n = p.first; 
+                         start_2[flag][j++] = start_1[i]; 
+                         while (n != NULL) { 
+                                 //TODO 
+                                 if (n->id != start) { 
+                                         start_2[flag][j++] = n->id; 
+                                 } 
+                                 n=n->next; 
+                         } 
+                         start2_num[flag] = j; 
+                         flag++; 
+                 } 
+         } 
+         int cnt=0; 
+         int find[10]; 
+         for (i = 0; i < flag; i++) { 
+                 //TODO 
+                 same_num = findSame(start_2[i], end_1, same, start2_num[i], end1_num + 1); 
+                 for (int j = 0; j < same_num; j++) { 
+                         //TODO 
+                         Point pt = findPoint(start_2[i][0]); 
+                         Neighbour *nt = find_Neighbour(start_2[i][0], p1); 
+                         insert_wayNode(allWay[routeCount], start_2[i][0], pt.name, nt->route); 
+                         time[routeCount] = method_f(nt); 
+                         nt = find_Neighbour(same[j], pt); 
+                         pt = findPoint(same[j]); 
+                         insert_wayNode(allWay[routeCount], same[j], pt.name, nt->route); 
+                         time[routeCount] += method_f(nt); 
+                         nt = find_Neighbour(end, pt); 
+                         insert_wayNode(allWay[routeCount], end, endN, nt->route); 
+                         time[routeCount] += method_f(nt); 
+                         printWay(allWay[routeCount++]); 
+                         find[cnt++]=same[j]; 
+                 } 
+         } 
+         for(int m=0;m<flag;m++){ 
+                 //TODO 
+                 for(int n=0;n<start2_num[m];n++){ 
+                         for(int k=0;k<cnt;k++){ 
+                                 if(find[k]==start_2[m][n]){ 
+                                         start_2[m][n]=-1; 
+                                 } 
+                         } 
+                 } 
+         } 
+         int flag2 = 0; 
+         for (i = 1; i <= end1_num; i++) { 
+                 //TODO 
+                 int j = 0; 
+                 if (end_1[i] != -1) { 
+                         p = findPoint(end_1[i]); 
+                         n = p.first; 
+                         end_2[flag2][j++] = end_1[i]; 
+                         while (n != NULL) { 
+  
+                                 if (n->id != end) { 
+                                         end_2[flag2][j++] = n->id; 
+                                 } 
+                                 n = n->next; 
+                         } 
+                         end2_num[flag2] = j; 
+                         flag2++; 
+                 } 
+         } 
+         for (i = 0; i < flag; i++) { 
+                 for (int j = 0; j < flag2; j++) { 
+                         same_num = findSame(start_2[i], end_2[j], same, start2_num[i], end2_num[j]); 
+  
+                         for (int k = 0; k < same_num; k++) { 
+                                 Neighbour *nt = find_Neighbour(start_2[i][0], p1); 
+                                 Point pt = findPoint(start_2[i][0]); 
+                                 insert_wayNode(allWay[routeCount], nt->id, pt.name, nt->route); 
+                                 time[routeCount] = method_f(nt); 
+                                 nt = find_Neighbour(same[k], pt); 
+                                 pt = findPoint(same[k]); 
+                                 insert_wayNode(allWay[routeCount], nt->id, pt.name, nt->route); 
+                                 time[routeCount] += method_f(nt); 
+                                 nt = find_Neighbour(end_2[j][0], pt); 
+                                 pt = findPoint(end_2[j][0]); 
+                                 insert_wayNode(allWay[routeCount], nt->id, pt.name, nt->route); 
+                                 time[routeCount] += method_f(nt); 
+                                 nt = find_Neighbour(end, pt); 
+                                 insert_wayNode(allWay[routeCount], nt->id, endN, nt->route); 
+                                 time[routeCount] += method_f(nt); 
+                                 printWay(allWay[routeCount++]); 
+                         } 
+                 } 
+         } 
+         return routeCount; 
+ } 
+ ```
