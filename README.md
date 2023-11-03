@@ -362,3 +362,56 @@ void loop() {
          return routeCount; 
  } 
  ```
+
+ ```c
+//最少换乘
+void least_Change(int start,int end) {
+    wayNode *w = createWay();
+    wayNode *leastChangeWay = createWay();
+    int leastChaneCnt = MAX;
+    char routeT1[20];
+    char routeT2[20];
+    wayNode *change[10];
+    int count = allRoute(change,start,end);
+    int changeCount[count];
+    for (int i = 0; i < count; i++) {
+        //TODO
+        int cnt = 0;
+        w = change[i]->next;
+        while (w->next != NULL) {
+            //TODO
+            char **ss1;
+            char **ss2;
+            ss1 = (char**)malloc(sizeof(char*));
+            ss2 = (char**)malloc(sizeof(char*));
+            strcpy(routeT2, w->next->route);
+            strcpy(routeT1, w->route);
+            int cnt1 = splitComma(routeT1, ss1);
+            int cnt2 = splitComma(routeT2, ss2);
+            int flag = 0;
+            for (int j = 0; j < cnt1; j++) {
+                //TODO
+                for (int k = 0; k < cnt2; k++) {
+                    if (equal_f(ss1[j], ss2[k])) {
+                        //TODO
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag)
+                    //TODO
+                    break;
+            }
+            if (!flag)
+                cnt++;
+            w = w->next;
+        }
+        changeCount[i] = cnt;
+        if (changeCount[i] < leastChaneCnt) {
+            //TODO
+            copy_way(change[i], leastChangeWay);
+        }
+    }
+    printWay(leastChangeWay);
+}
+ ```
