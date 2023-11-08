@@ -415,3 +415,264 @@ void least_Change(int start,int end) {
     printWay(leastChangeWay);
 }
  ```
+
+ ```java
+// This file is auto-generated, don't edit it. Thanks.
+package com.aliyun.sample;
+
+import com.aliyun.tea.*;
+import com.aliyun.iot20180120.*;
+import com.aliyun.iot20180120.models.*;
+import com.aliyun.teaopenapi.*;
+import com.aliyun.teaopenapi.models.*;
+import com.aliyun.teautil.*;
+import com.aliyun.darabonba.env.*;
+import com.aliyun.teaconsole.*;
+import com.aliyun.darabonbastring.*;
+import com.aliyun.darabonbanumber.*;
+import com.aliyun.darabonba.array.*;
+
+public class Sample {
+
+    /**
+     * 初始化IoT(Iot20180120)客户端
+     */
+    public static com.aliyun.iot20180120.Client initialization() throws Exception {
+        Config config = new Config()
+                .setRegionId("cn-shanghai")
+                .setAccessKeyId(com.aliyun.darabonba.env.EnvClient.getEnv("ACCESS_KEY_ID"))
+                .setAccessKeySecret(com.aliyun.darabonba.env.EnvClient.getEnv("ACCESS_KEY_SECRET"));
+        return new com.aliyun.iot20180120.Client(config);
+    }
+
+    /**
+     * 入参校验
+     * param:pProductKey 产品KEY
+     * param:pDeviceName 设备名称
+     * param:pTopic 消息Topic
+     * return 校验通过:true 校验失败:false
+     */
+    public static Boolean checkParameters(String pProductKey, String pDeviceName, String pTopic) throws Exception {
+        if (com.aliyun.teautil.Common.empty(pProductKey)) {
+            com.aliyun.teaconsole.Client.log("==========入参[ProductKey]不能为空==========");
+            return false;
+        }
+
+        if (com.aliyun.teautil.Common.empty(pDeviceName)) {
+            com.aliyun.teaconsole.Client.log("==========入参[DeviceName]不能为空==========");
+            return false;
+        }
+
+        if (com.aliyun.teautil.Common.empty(pTopic)) {
+            com.aliyun.teaconsole.Client.log("==========入参[Topic]不能为空==========");
+            return false;
+        }
+
+        // 入参校验通过
+        return true;
+    }
+
+    /**
+     * 获取主处理main的入参元素值，未设置时返回空字符串。
+     * param:主处理main的入参数组
+     * param:主处理main的入参下标
+     * return:指定下标对应的具体入参内容，未设置则返回空字符串。
+     */
+    public static String getArg(java.util.List<String> args, Integer pIndex) throws Exception {
+        Long length = com.aliyun.darabonbanumber.Client.itol(com.aliyun.darabonba.array.Client.size(args));
+        if (com.aliyun.darabonbanumber.Client.gt(length, com.aliyun.darabonbanumber.Client.itol(pIndex))) {
+            return args.get(pIndex);
+        }
+
+        return "";
+    }
+
+    /**
+     * 调用Iot20180120客户端发送请求
+     * 1.SubscribeTopic 为指定设备订阅Topic
+     */
+    public static SubscribeTopicResponseBody subscribeTopicSample(com.aliyun.iot20180120.Client client, String pIotInstanceId, String pProductKey, String pDeviceName, String pTopic) throws Exception {
+        // 要订阅的Topic，最多订阅10个Topic。
+        // Topic的操作权限必须为订阅或发布和订阅。
+        java.util.List<String> arrTopic = com.aliyun.darabonbastring.Client.split(pTopic, ",", 10);
+        SubscribeTopicRequest request = new SubscribeTopicRequest()
+                .setIotInstanceId(pIotInstanceId)
+                .setProductKey(pProductKey)
+                .setDeviceName(pDeviceName)
+                .setTopic(arrTopic);
+        try {
+            com.aliyun.teaconsole.Client.log("-----------1.SubscribeTopic 为指定设备订阅Topic-----------");
+            com.aliyun.teaconsole.Client.log(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+            SubscribeTopicResponse response = client.subscribeTopic(request);
+            com.aliyun.teaconsole.Client.log(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(response.body)));
+            return response.body;
+        } catch (TeaException error) {
+            com.aliyun.teaconsole.Client.log(error.message);
+            return new SubscribeTopicResponseBody()
+                    .setSuccess(false);
+        } catch (Exception _error) {
+            TeaException error = new TeaException(_error.getMessage(), _error);
+            com.aliyun.teaconsole.Client.log(error.message);
+            return new SubscribeTopicResponseBody()
+                    .setSuccess(false);
+        }        
+    }
+
+    /**
+     * 调用Iot20180120客户端发送请求
+     * 2.查询设备已订阅的Topic列表：QueryDeviceSubTopic
+     */
+    public static QueryDeviceSubTopicResponseBody queryDeviceSubTopicSample(com.aliyun.iot20180120.Client client, String pIotInstanceId, String pProductKey, String pDeviceName) throws Exception {
+        QueryDeviceSubTopicRequest request = new QueryDeviceSubTopicRequest()
+                .setIotInstanceId(pIotInstanceId)
+                .setProductKey(pProductKey)
+                .setDeviceName(pDeviceName);
+        try {
+            com.aliyun.teaconsole.Client.log("-----------2.查询设备已订阅的Topic列表：QueryDeviceSubTopic-----------");
+            com.aliyun.teaconsole.Client.log(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+            QueryDeviceSubTopicResponse response = client.queryDeviceSubTopic(request);
+            com.aliyun.teaconsole.Client.log(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(response.body)));
+            return response.body;
+        } catch (TeaException error) {
+            com.aliyun.teaconsole.Client.log(error.message);
+            return new QueryDeviceSubTopicResponseBody()
+                    .setSuccess(false);
+        } catch (Exception _error) {
+            TeaException error = new TeaException(_error.getMessage(), _error);
+            com.aliyun.teaconsole.Client.log(error.message);
+            return new QueryDeviceSubTopicResponseBody()
+                    .setSuccess(false);
+        }        
+    }
+
+    /**
+     * 调用Iot20180120客户端发送请求
+     * 3.通过自定义Topic向设备发布消息：Pub
+     */
+    public static PubResponseBody pubSample(com.aliyun.iot20180120.Client client, String pIotInstanceId, String pProductKey, String pDeviceName, String pTopicName) throws Exception {
+        // 要发送的消息主体。
+        // 您需要将消息原文转换成二进制数据，并进行Base64编码，从而生成消息主体。
+        // 原文：test-ColeSample-PubRequest-MessageContent
+        String strMessageContent = "dGVzdC1Db2xlU2FtcGxlLVB1YlJlcXVlc3QtTWVzc2FnZUNvbnRlbnQ=";
+        PubRequest request = new PubRequest()
+                .setIotInstanceId(pIotInstanceId)
+                .setProductKey(pProductKey)
+                .setDeviceName(pDeviceName)
+                .setMessageContent(strMessageContent)
+                .setTopicFullName(pTopicName)
+                .setQos(0);
+        try {
+            com.aliyun.teaconsole.Client.log("-----------3.通过自定义Topic向设备发布消息：Pub-----------");
+            com.aliyun.teaconsole.Client.log(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+            PubResponse response = client.pub(request);
+            com.aliyun.teaconsole.Client.log(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(response.body)));
+            return response.body;
+        } catch (TeaException error) {
+            com.aliyun.teaconsole.Client.log(error.message);
+            return new PubResponseBody()
+                    .setSuccess(false);
+        } catch (Exception _error) {
+            TeaException error = new TeaException(_error.getMessage(), _error);
+            com.aliyun.teaconsole.Client.log(error.message);
+            return new PubResponseBody()
+                    .setSuccess(false);
+        }        
+    }
+
+    /**
+     * 调用Iot20180120客户端发送请求
+     * 4.通过消息ID查询设备上下行消息的详情：QueryMessageInfo
+     */
+    public static QueryMessageInfoResponseBody queryMessageInfoSample(com.aliyun.iot20180120.Client client, String pIotInstanceId, String pUniMsgId) throws Exception {
+        QueryMessageInfoRequest request = new QueryMessageInfoRequest()
+                .setIotInstanceId(pIotInstanceId)
+                .setUniMsgId(pUniMsgId);
+        try {
+            com.aliyun.teaconsole.Client.log("-----------4.通过消息ID查询设备上下行消息的详情：QueryMessageInfo-----------");
+            com.aliyun.teaconsole.Client.log(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+            QueryMessageInfoResponse response = client.queryMessageInfo(request);
+            com.aliyun.teaconsole.Client.log(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(response.body)));
+            return response.body;
+        } catch (TeaException error) {
+            com.aliyun.teaconsole.Client.log(error.message);
+            return new QueryMessageInfoResponseBody()
+                    .setSuccess(false);
+        } catch (Exception _error) {
+            TeaException error = new TeaException(_error.getMessage(), _error);
+            com.aliyun.teaconsole.Client.log(error.message);
+            return new QueryMessageInfoResponseBody()
+                    .setSuccess(false);
+        }        
+    }
+
+    /**
+     * 【主处理main】
+     * param.1:IotInstanceId 实例ID
+     * param.2:ProductKey 产品KEY
+     * param.3:DeviceName 设备名称
+     * param.4:Topic 要订阅的Topic
+     */
+    public static void main(String[] args_) throws Exception {
+        java.util.List<String> args = java.util.Arrays.asList(args_);
+        // * param.1:IotInstanceId 实例ID
+        //   您可在物联网平台控制台的实例概览页面，查看当前实例的ID。
+        //   若有ID值，必须传入该ID值，否则调用会失败。
+        //   如何获取到实例ID:https://help.aliyun.com/document_detail/267533.htm
+        //   实例的更多信息，请参见实例概述：https://help.aliyun.com/document_detail/356505.htm
+        String argIotInstanceId = Sample.getArg(args, 0);
+        // * param.2:ProductKey 产品KEY
+        //   ProductKey是物联网平台为新建产品颁发的全局唯一标识符。
+        //   您可以在物联网平台控制台或调用QueryProductList，查看当前账号下所有产品的信息。
+        String argProductKey = Sample.getArg(args, 1);
+        // * param.3:DeviceName 设备名称
+        String argDeviceName = Sample.getArg(args, 2);
+        // * param.4:Topic 要订阅的Topic
+        //   最多订阅10个Topic。
+        //   Topic的操作权限必须为订阅或发布和订阅。
+        String argTopic = Sample.getArg(args, 3);
+        // 【入参校验】
+        if (!Sample.checkParameters(argProductKey, argDeviceName, argTopic)) {
+            // 入参校验失败
+            return ;
+        }
+
+        // 【发起客户端调用】
+        com.aliyun.teaconsole.Client.log("hello world!");
+        com.aliyun.iot20180120.Client client = Sample.initialization();
+        com.aliyun.teaconsole.Client.log("==========A.为指定设备订阅Topic==========");
+        SubscribeTopicResponseBody responseBodySubscribe = Sample.subscribeTopicSample(client, argIotInstanceId, argProductKey, argDeviceName, argTopic);
+        if (!responseBodySubscribe.success) {
+            com.aliyun.teaconsole.Client.log("为指定设备订阅Topic失败。");
+            return ;
+        }
+
+        com.aliyun.teaconsole.Client.log("==========B.查询设备已订阅的Topic列表==========");
+        QueryDeviceSubTopicResponseBody responseBodyQueryTopic = Sample.queryDeviceSubTopicSample(client, argIotInstanceId, argProductKey, argDeviceName);
+        if (!responseBodyQueryTopic.success) {
+            com.aliyun.teaconsole.Client.log("查询设备已订阅的Topic列表失败。");
+            return ;
+        }
+
+        java.util.List<QueryDeviceSubTopicResponseBody.QueryDeviceSubTopicResponseBodyTopicList> arrTopicList = responseBodyQueryTopic.topicList;
+        for (QueryDeviceSubTopicResponseBody.QueryDeviceSubTopicResponseBodyTopicList modelTopicInfo : arrTopicList) {
+            com.aliyun.teaconsole.Client.log("==========C.通过自定义Topic向设备发布消息==========");
+            String strTopicName = modelTopicInfo.topicName;
+            PubResponseBody responseBodyPub = Sample.pubSample(client, argIotInstanceId, argProductKey, argDeviceName, strTopicName);
+            if (!responseBodyPub.success) {
+                com.aliyun.teaconsole.Client.log("通过自定义Topic向设备发布消息失败。");
+            } else {
+                com.aliyun.teaconsole.Client.log("==========D.通过消息ID查询设备消息的详情==========");
+                // 物联网平台为消息生成的唯一标识ID
+                // 您可登录物联网平台控制台(https://iot.console.aliyun.com/lk/monitor/log)，在监控运维 > 日志服务页面，获取消息ID信息。
+                String strMsgId = responseBodyPub.messageId;
+                QueryMessageInfoResponseBody responseBody = Sample.queryMessageInfoSample(client, argIotInstanceId, strMsgId);
+                if (!responseBody.success) {
+                    com.aliyun.teaconsole.Client.log("通过消息ID查询设备消息的详情失败。");
+                }
+
+            }
+
+        }
+    }
+}
+ ```
